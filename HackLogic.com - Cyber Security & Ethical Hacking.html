@@ -1,0 +1,385 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://127.0.0.1:5500/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="HackLogic.com - Cyber Security &amp; Ethical Hacking resources, research, books, courses, videos, and documentaries.">
+  <title>HackLogic.com - Cyber Security &amp; Ethical Hacking</title>
+  <style>
+    /* Base mobile-first styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background: #f4f4f4;
+      color: #333;
+    }
+    header {
+      background: #222;
+      color: #fff;
+      padding: 20px;
+      text-align: center;
+    }
+    header p.founder {
+      font-style: italic;
+      font-size: 0.9em;
+      margin-top: 5px;
+    }
+    nav {
+      background: #333;
+    }
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    nav ul li {
+      margin: 5px 10px;
+    }
+    nav ul li a {
+      color: #fff;
+      text-decoration: none;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    section.banner {
+      background: url('https://via.placeholder.com/1500x500') no-repeat center center/cover;
+      height: 300px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-shadow: 2px 2px 4px #000;
+    }
+    section.banner h1 {
+      font-size: 2em;
+      text-align: center;
+    }
+    section.content, section.media, section.contact {
+      padding: 20px;
+      margin: auto;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 20px;
+    }
+    .card {
+      background: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: transform 0.3s;
+    }
+    .card:hover {
+      transform: translateY(-5px);
+    }
+    footer {
+      background: #222;
+      color: #fff;
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+    }
+    button {
+      background: #0078d7;
+      border: none;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 3px;
+      cursor: pointer;
+      font-size: 1em;
+    }
+    button:hover {
+      background: #005a9e;
+    }
+    /* Contact form styles */
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      max-width: 400px;
+      margin: auto;
+    }
+    form input, form textarea {
+      padding: 10px;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      font-size: 1em;
+    }
+    /* Modal styles */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.4);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      border-radius: 5px;
+      width: 90%;
+      max-width: 400px;
+      position: relative;
+    }
+    .modal-content h2 {
+      margin-top: 0;
+    }
+    .close {
+      position: absolute;
+      right: 10px;
+      top: 10px;
+      font-size: 1.5em;
+      cursor: pointer;
+    }
+    /* Responsive adjustments for tablets and above */
+    @media (min-width: 600px) {
+      section.banner {
+        height: 400px;
+      }
+      section.banner h1 {
+        font-size: 2.5em;
+      }
+      .grid {
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      }
+      section.content, section.media, section.contact {
+        padding: 40px 20px;
+      }
+    }
+    /* Responsive adjustments for desktop and larger */
+    @media (min-width: 992px) {
+      header, nav, footer {
+        padding: 20px 40px;
+      }
+      section.banner {
+        height: 500px;
+      }
+      section.banner h1 {
+        font-size: 3em;
+      }
+      .grid {
+        grid-gap: 20px;
+      }
+    }
+  </style>
+<style type="text/css" id="operaUserStyle"></style><style type="text/css"></style></head>
+<body>
+  <header>
+    <h1>HackLogic <span class="Ltd"></span></h1>
+    <p>Cyber Security &amp; Ethical Hacking</p>
+    <p class="founder">CEO &amp; Founder: Riyaz Ali (Computer Science Eng)</p>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="http://127.0.0.1:5500/index.html#research">Research Papers</a></li>
+      <li><a href="http://127.0.0.1:5500/index.html#books">Books &amp; E-books</a></li>
+      <li><a href="http://127.0.0.1:5500/index.html#courses">Courses</a></li>
+      <li><a href="http://127.0.0.1:5500/index.html#videos">Videos</a></li>
+      <li><a href="http://127.0.0.1:5500/index.html#docs">Documentaries</a></li>
+      <li><a href="javascript:void(0)" id="contactBtn">Contact Us</a></li>
+      <li><a href="javascript:void(0)" id="registerBtn">Register</a></li>
+    </ul>
+  </nav>
+  <section class="banner">
+    <h1>Secure Your Future</h1>
+  </section>
+  <section class="content">
+    <div class="grid">
+      <div class="card" id="research">
+        <h2>Research Papers</h2>
+        <p>Discover the latest studies and breakthroughs in cyber security and ethical hacking.</p>
+        <button type="button" onclick="navigateSection(&#39;research&#39;)">Read More</button>
+      </div>
+      <div class="card" id="books">
+        <h2>Books &amp; E-books</h2>
+        <p>Browse our curated collection of books and e-books on various security topics.</p>
+        <button type="button" onclick="navigateSection(&#39;books&#39;)">Explore</button>
+      </div>
+      <div class="card" id="courses">
+        <h2>Courses</h2>
+        <p>Enroll in current training sessions and courses to advance your cyber security skills.</p>
+        <button type="button" onclick="navigateSection(&#39;courses&#39;)">Enroll Now</button>
+      </div>
+      <div class="card" id="videos">
+        <h2>Videos</h2>
+        <p>Watch tutorials, expert interviews, and deep dives into the latest security trends.</p>
+        <button type="button" onclick="navigateSection(&#39;videos&#39;)">Watch Videos</button>
+      </div>
+      <div class="card" id="docs">
+        <h2>Documentaries</h2>
+        <p>Explore fascinating documentaries that highlight the journeys and challenges in the cyber world.</p>
+        <button type="button" onclick="navigateSection(&#39;docs&#39;)">View Documentaries</button>
+      </div>
+    </div>
+  </section>
+  <!-- New Featured Media Section -->
+  <section class="media">
+    <h2>Featured Media</h2>
+    <div class="media-content">
+      <img src="https://via.placeholder.com/1024x576?text=Professional+Content" alt="Professional Content">
+      <video controls="">
+        <source src="video.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+    </div>
+  </section>
+  <section class="contact">
+    <h2>Contact Us</h2>
+    <form action="mailto:your@email.com" method="post" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required="">
+      <input type="email" name="email" placeholder="Your Email" required="">
+      <textarea name="message" placeholder="Message" required=""></textarea>
+      <button type="submit">Send</button>
+    </form>
+  </section>
+  <footer>
+    <p>© 2023 www.HackLogic.com. All Rights Reserved.</p>
+  </footer>
+
+  <!-- Registration Modal -->
+  <div id="registerModal" class="modal">
+    <div class="modal-content">
+      <span class="close" aria-label="Close">×</span>
+      <h2>Register</h2>
+      <form id="registerForm">
+        <input type="text" placeholder="Username" required="">
+        <input type="email" placeholder="Email" required="">
+        <input type="password" placeholder="Password" required="">
+        <button type="submit">Register</button>
+      </form>
+    </div>
+  </div>
+
+  <script>
+    function navigateSection(id) {
+      const section = document.getElementById(id);
+      if(section) {
+        section.scrollIntoView({ behavior: 'smooth' });
+      }
+    }
+
+    function scrollToContact() {
+      document.querySelector('.contact').scrollIntoView({ behavior: 'smooth' });
+    }
+
+    // Open Contact Us section.
+    document.getElementById('contactBtn').addEventListener('click', scrollToContact);
+
+    // Function to display the registration modal.
+    function register() {
+      document.getElementById('registerModal').style.display = 'block';
+    }
+
+    // Attach event listener to the Register button.
+    document.getElementById('registerBtn').addEventListener('click', register);
+
+    // Close the modal when the close button is clicked.
+    document.querySelector('#registerModal .close').addEventListener('click', function() {
+      document.getElementById('registerModal').style.display = 'none';
+    });
+
+    // Close the modal if the user clicks outside the modal-content.
+    window.addEventListener('click', function(event) {
+      const modal = document.getElementById('registerModal');
+      if (event.target === modal) {
+        modal.style.display = 'none';
+      }
+    });
+
+    // Handle F-key presses for navigation.
+    function Key(e) {
+      if (e.key.startsWith('F') && !isNaN(e.key.substring(1))) {
+        let fnum = parseInt(e.key.substring(1));
+        switch (fnum) {
+          case 1:
+            e.preventDefault();
+            alert("F1 pressed: Navigating to the Banner");
+            document.querySelector('.banner').scrollIntoView({ behavior: 'smooth' });
+            break;
+          case 2:
+            alert("F2 pressed: Navigating to Research Papers");
+            document.getElementById('research').scrollIntoView({ behavior: 'smooth' });
+            break;
+          case 3:
+            alert("F3 pressed: Navigating to Books & E-books");
+            document.getElementById('books').scrollIntoView({ behavior: 'smooth' });
+            break;
+          case 4:
+            alert("F4 pressed: Navigating to Courses");
+            document.getElementById('courses').scrollIntoView({ behavior: 'smooth' });
+            break;
+          case 5:
+            alert("F5 pressed: Navigating to Videos");
+            document.getElementById('videos').scrollIntoView({ behavior: 'smooth' });
+            break;
+          case 6:
+            alert("F6 pressed: Navigating to Documentaries");
+            document.getElementById('docs').scrollIntoView({ behavior: 'smooth' });
+            break;
+          case 7:
+            alert("F7 pressed: Scrolling to Contact section");
+            document.querySelector('.contact').scrollIntoView({ behavior: 'smooth' });
+            break;
+          case 8:
+            alert("F8 pressed: Opening Registration Modal");
+            register();
+            break;
+          default:
+            alert("Function key F" + fnum + " pressed");
+            break;
+        }
+      }
+    }
+
+    window.addEventListener('keydown', Key);
+  </script>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>
