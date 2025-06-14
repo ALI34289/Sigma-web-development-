@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<!-- saved from url=(0032)http://127.0.0.1:5500/index.html -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Welcome to Vans Hostel &amp; PG. Experience comfort and convenience in a modern environment.">
+    <meta name="keywords" content="Hostel, PG, Accommodation, Comfort, Modern Amenities, Meerut, Vans Hostel">
+    <link rel="icon" type="image/png" href="./Vans Hostel and PG_files/image2.png">
+    <!-- OpenGraph Tags -->
+    <meta property="og:title" content="Welcome to Vans Hostel &amp; PG">
+    <meta property="og:description" content="Experience modern comfort and convenience at Vans Hostel &amp; PG.">
+    <meta property="og:image" content="image.png">
+    <meta property="og:url" content="http://youtube.com">
+    <meta property="og:type" content="website">
+    <title>Welcome to Vans Hostel &amp; PG</title>
+    <style>
+        /* Global Styles */
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background: #f2f2f2;
+            color: #333;
+        }
+        a {
+            text-decoration: none;
+        }
+        /* Header */
+        header {
+            background: linear-gradient(135deg, #0055a5, #003366);
+            padding: 40px 20px;
+            text-align: center;
+            color: #fff;
+        }
+        header h1 {
+            font-size: 3em;
+            margin: 0;
+            letter-spacing: 1px;
+        }
+        header p {
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+        /* Navigation */
+        nav {
+            background: #0055a5;
+            overflow-x: auto;
+        }
+        nav ul {
+            list-style: none;
+            margin: 0;
+            padding: 10px;
+            text-align: center;
+        }
+        nav li {
+            display: inline-block;
+            margin: 0 15px;
+        }
+        nav li a {
+            color: #fff;
+            font-weight: bold;
+        }
+        /* Image Gallery */
+        .image-gallery {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            overflow-x: auto;
+            white-space: nowrap;
+            padding: 10px;
+        }
+        .image-gallery img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border: 2px solid #003366;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+        }
+        .image-gallery img:hover {
+            transform: scale(1.05);
+        }
+        /* Hero Section */
+        .hero {
+            background: url('image.png') no-repeat center center/cover;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            text-shadow: 1px 1px 5px rgba(0, 0, 0, 0.8);
+        }
+        .hero h1 {
+            font-size: 48px;
+        }
+        /* Containers */
+        main {
+            max-width: 1200px;
+            margin: 20px auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        section {
+            margin-bottom: 40px;
+        }
+        section h2 {
+            font-size: 2em;
+            margin-bottom: 15px;
+        }
+        /* Rooms Section */
+        .rooms-section {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            gap: 20px;
+            margin-top: 10px;
+        }
+        .rooms-section img {
+            width: 100%;
+            max-width: 400px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .rooms-section ul {
+            list-style: none;
+            padding: 0;
+        }
+        .rooms-section li {
+            background: #e6f0ff;
+            margin-bottom: 10px;
+            padding: 12px 15px;
+            border-left: 5px solid #0055a5;
+            border-radius: 4px;
+        }
+        /* Facilities & Foods Lists */
+        .facilities ul,
+        .foods ul {
+            list-style: none;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            margin-top: 15px;
+        }
+        .facilities li,
+        .foods li {
+            flex: 1 1 200px;
+            padding: 15px;
+            border-left: 4px solid;
+            border-radius: 5px;
+        }
+        .facilities li {
+            background: #e6f0ff;
+            border-color: #0055a5;
+        }
+        .foods li {
+            background: #fff3e0;
+            border-color: #d35400;
+        }
+        /* Rules */
+        .rules ul {
+            list-style: disc;
+            padding-left: 20px;
+        }
+        /* Contact Form */
+        .contact-form div {
+            margin-bottom: 15px;
+        }
+        .contact-form label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        .contact-form input,
+        .contact-form textarea {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .contact-form button {
+            background-color: #0055a5;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .wa-link {
+            background-color: #25D366;
+            color: #fff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        /* Footer */
+        footer {
+            background: linear-gradient(135deg, #2b2e4a, #1b1c2a);
+            color: #fff;
+        }
+        .footer-content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: space-between;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+        .footer-section {
+            flex: 1;
+            min-width: 250px;
+            margin: 10px;
+        }
+        .footer-section h3 {
+            font-size: 1.5em;
+            border-bottom: 1px solid rgba(255,255,255,0.3);
+            padding-bottom: 10px;
+            margin-bottom: 15px;
+        }
+        .footer-links {
+            list-style: none;
+            padding: 0;
+        }
+        .footer-links li {
+            margin-bottom: 10px;
+            font-size: 1em;
+        }
+        .footer-links a {
+            color: #fff;
+            transition: opacity 0.3s;
+        }
+        .footer-links a:hover {
+            opacity: 0.7;
+        }
+        .footer-bottom {
+            text-align: center;
+            padding: 15px 20px;
+            font-size: 0.9em;
+        }
+    </style>
+<style type="text/css" id="operaUserStyle"></style><style type="text/css"></style></head>
+<body>
+    <header id="home">
+        <h1>Welcome to Vans Hostel</h1>
+        <p>Your Home Away from Home</p>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="http://127.0.0.1:5500/index.html#home">Home</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#about">About Us</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#rooms">Rooms</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#facilities">Facilities</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#foods">Foods</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#rules">Rules &amp; Regulations</a></li>
+            <li><a href="http://127.0.0.1:5500/index.html#contact">Contact</a></li>
+        </ul>
+        <div class="image-gallery">
+            <img src="./Vans Hostel and PG_files/image.png" alt="Gallery image">
+            <img src="./Vans Hostel and PG_files/image2.png" alt="Gallery image">
+            <img src="./Vans Hostel and PG_files/image3.png" alt="Gallery image">
+            <img src="./Vans Hostel and PG_files/image4.png" alt="Gallery image">
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1>Experience Comfort &amp; Convenience</h1>
+    </section>
+
+    <main>
+        <section id="about">
+            <h2>About Us</h2>
+            <p>
+                At Vans Hostel, we are dedicated to providing a welcoming environment where modern comfort meets affordability. Our commitment to exceptional service ensures that every guest feels right at home.
+            </p>
+            <ul>
+                <li><strong>Modern Comfort:</strong> Enjoy contemporary amenities that enhance your living experience.</li>
+                <li><strong>Prime Location:</strong> Conveniently located with easy access to local attractions and transport links.</li>
+                <li><strong>24/7 Support:</strong> Our professional team is available around the clock to ensure a hassle-free stay.</li>
+            </ul>
+            <p>
+                For more details, reach out to us at:<br>
+                Phone: +91 84459 39494<br>
+                Owner Name: Shatish Kumar<br>
+                Address: Subharti University, NH-50, Vedvaspuri Phase-1, Meerut, Uttar Pradesh 250005<br>
+                Email: contact@vanshostel.com
+            </p>
+        </section>
+
+        <section id="rooms">
+            <h2>Rooms</h2>
+            <div class="rooms-section">
+                <img src="./Vans Hostel and PG_files/image.png" alt="Cozy room">
+                <div>
+                    <p style="color: #003366; font-size: 1.2em;">
+                        Our rooms are designed with modern comfort and style. Choose your preferred room type:
+                    </p>
+                    <ul>
+                        <li>1 Seater Room</li>
+                        <li>2 Seater Room</li>
+                        <li>3 Seater Room</li>
+                    </ul>
+                </div>
+            </div>
+            <p>
+                We offer a variety of room types—from private rooms to shared spaces—to accommodate your needs while ensuring a cozy environment.
+            </p>
+        </section>
+
+        <section id="facilities" class="facilities">
+            <h2>Facilities</h2>
+            <p style="font-size: 1.2em; color: #0055a5;">
+                Our hostel is equipped with premium facilities designed to provide you with a seamless and enjoyable stay:
+            </p>
+            <ul>
+                <li><strong>High-Speed WiFi:</strong> Reliable connectivity.</li>
+                <li><strong>Communal Kitchen:</strong> Fully-equipped kitchen.</li>
+                <li><strong>Lounge Area:</strong> Relax in our communal space.</li>
+                <li><strong>24/7 Security:</strong> Your safety is our priority.</li>
+            </ul>
+            <p>
+                Enjoy free WiFi, communal kitchens, lounge areas, and round-the-clock security services, all designed to enhance your stay.
+            </p>
+        </section>
+
+        <section id="foods" class="foods">
+            <h2>Foods</h2>
+            <p style="font-size: 1.2em; color: #d35400;">
+                Enjoy a variety of delicious and affordable meals at Vans Hostel. Whether you're in the mood for traditional dishes or international cuisine, we have something to satisfy every palate.
+            </p>
+            <ul>
+                <li>Breakfast Buffet</li>
+                <li>Lunch Specials</li>
+                <li>Dinner Delicacies</li>
+                <li>Snacks &amp; Beverages</li>
+            </ul>
+        </section>
+
+        <section id="rules" class="rules">
+            <h2>Rules and Regulations</h2>
+            <p style="font-size: 1.2em; color: #c0392b;">
+                To ensure a harmonious living environment, please adhere to the following rules:
+            </p>
+            <ul>
+                <li>No smoking inside the premises.</li>
+                <li>Maintain cleanliness in common areas.</li>
+                <li>Respect quiet hours between 10 PM and 6 AM.</li>
+                <li>Visitors allowed only during designated hours.</li>
+                <li>Follow all safety instructions provided by the management.</li>
+            </ul>
+        </section>
+
+        <section id="contact" class="contact">
+            <h2>Contact Us</h2>
+            <p style="font-size: 1.1em; color: #003366; line-height: 1.6;">
+                For inquiries or assistance, please fill out the form below or contact us directly:
+            </p>
+            <form action="http://127.0.0.1:5500/index.html#" method="post" class="contact-form">
+                <div>
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="name" required="">
+                </div>
+                <div>
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" required="">
+                </div>
+                <div>
+                    <label for="message">Message:</label>
+                    <textarea id="message" name="message" rows="5" required=""></textarea>
+                </div>
+                <button type="submit">Submit</button>
+            </form>
+            <div style="text-align: center;">
+                <a href="https://wa.me/918445939494?text=Hello,%20I%20would%20like%20to%20know%20more%20about%20your%20services." target="_blank" class="wa-link">
+                    Chat with us on WhatsApp
+                </a>
+            </div>
+            <p>
+                We are available Monday to Saturday, 9 AM to 6 PM. We look forward to hearing from you!
+            </p>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>About Vans Hostel</h3>
+                <p>
+                    Experience unparalleled comfort and convenience at Vans Hostel &amp; PG. Situated at Subharti University, we blend modern amenities with a homely atmosphere.
+                </p>
+            </div>
+            <div class="footer-section">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="http://127.0.0.1:5500/index.html#about">About Us</a></li>
+                    <li><a href="http://127.0.0.1:5500/index.html#rooms">Rooms</a></li>
+                    <li><a href="http://127.0.0.1:5500/index.html#facilities">Facilities</a></li>
+                    <li><a href="http://127.0.0.1:5500/index.html#contact">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Developer</h3>
+                <ul class="footer-links">
+                    <li>Name: Riyaz Ali</li>
+                    <li>Email: <a href="mailto:riyazali.se25@gmail.com">riyazali.se25@gmail.com</a></li>
+                    <li><a href="https://github.com/yourprofile" target="_blank">GitHub</a></li>
+                    <li><a href="https://linkedin.com/in/yourprofile" target="_blank">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            © 2023 Vans Hostel &amp; PG. All rights reserved.
+        </div>
+    </footer>
+<!-- Code injected by live-server -->
+<script>
+	// <![CDATA[  <-- For SVG support
+	if ('WebSocket' in window) {
+		(function () {
+			function refreshCSS() {
+				var sheets = [].slice.call(document.getElementsByTagName("link"));
+				var head = document.getElementsByTagName("head")[0];
+				for (var i = 0; i < sheets.length; ++i) {
+					var elem = sheets[i];
+					var parent = elem.parentElement || head;
+					parent.removeChild(elem);
+					var rel = elem.rel;
+					if (elem.href && typeof rel != "string" || rel.length == 0 || rel.toLowerCase() == "stylesheet") {
+						var url = elem.href.replace(/(&|\?)_cacheOverride=\d+/, '');
+						elem.href = url + (url.indexOf('?') >= 0 ? '&' : '?') + '_cacheOverride=' + (new Date().valueOf());
+					}
+					parent.appendChild(elem);
+				}
+			}
+			var protocol = window.location.protocol === 'http:' ? 'ws://' : 'wss://';
+			var address = protocol + window.location.host + window.location.pathname + '/ws';
+			var socket = new WebSocket(address);
+			socket.onmessage = function (msg) {
+				if (msg.data == 'reload') window.location.reload();
+				else if (msg.data == 'refreshcss') refreshCSS();
+			};
+			if (sessionStorage && !sessionStorage.getItem('IsThisFirstTime_Log_From_LiveServer')) {
+				console.log('Live reload enabled.');
+				sessionStorage.setItem('IsThisFirstTime_Log_From_LiveServer', true);
+			}
+		})();
+	}
+	else {
+		console.error('Upgrade your browser. This Browser is NOT supported WebSocket for Live-Reloading.');
+	}
+	// ]]>
+</script>
+
+</body></html>
