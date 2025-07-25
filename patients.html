@@ -56,14 +56,18 @@
                 <label for="address" style="display: block; margin-bottom: 5px;">Permanent Address:</label>
                 <textarea id="address" name="address" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #ddd;"></textarea>
 
+                <label for="avatar" style="display: block; margin-bottom: 5px;">Patient Photo:</label>
+                <input type="file" id="avatar" name="avatar" accept="image/*" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #ddd;">
+
                 <button type="submit" style="background-color: #007bff; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer;">Add Patient</button>
             </form>
         </section>
 
         <section id="patient-list" style="background-color: #fff; padding: 20px; border-radius: 5px;">
             <button id="export-csv" style="background-color: #28a745; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer; margin-bottom: 20px;">Export to CSV</button>
+            <button id="print-report" style="background-color: #17a2b8; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer; margin-bottom: 20px;">Print Report</button>
             <h2 style="color: #333;">Patient List</h2>
-            <table style="width: 100%; border-collapse: collapse;">
+            <table id="patient-table" style="width: 100%; border-collapse: collapse;">
                 <thead>
                     <tr style="background-color: #f2f2f2;">
                         <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Patient ID</th>
@@ -120,6 +124,7 @@
         <p>&copy; 2025 Hospital Management System. All rights reserved.</p>
     </footer>
 
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.3/purify.min.js"></script>
     <script>
         let patients = JSON.parse(localStorage.getItem('patients')) || [];
         let currentPage = 1;
@@ -143,7 +148,8 @@
 
                 const nameCell = newRow.insertCell();
                 const genderIcon = patient.gender === 'male' ? 'fas fa-male' : (patient.gender === 'female' ? 'fas fa-female' : 'fas fa-user');
-                nameCell.innerHTML = `<i class="${genderIcon}" style="margin-right: 10px;"></i>${patient.name}`;
+                const avatarSrc = patient.avatar || 'https://i.imgur.com/O8bZ2XX.png';
+                nameCell.innerHTML = `<img src="${avatarSrc}" alt="Avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;"><i class="${genderIcon}" style="margin-right: 10px;"></i>${patient.name}`;
                 nameCell.style.border = '1px solid #ddd';
                 nameCell.style.padding = '10px';
 
@@ -237,6 +243,15 @@
             renderPatients();
         });
 
+        document.getElementById('print-report').addEventListener('click', () => {
+            const printContent = document.getElementById('patient-table').outerHTML;
+            const originalContent = document.body.innerHTML;
+            document.body.innerHTML = printContent;
+            window.print();
+            document.body.innerHTML = originalContent;
+            location.reload();
+        });
+
         document.getElementById('export-csv').addEventListener('click', () => {
             const headers = ['Patient ID', 'Name', 'Age', 'Gender', 'Contact', 'Problem', 'Permanent Address'];
             let csvContent = 'data:text/csv;charset=utf-8,' + headers.join(',') + '\n';
@@ -292,7 +307,8 @@
 
                 const nameCell = newRow.insertCell();
                 const genderIcon = patient.gender === 'male' ? 'fas fa-male' : (patient.gender === 'female' ? 'fas fa-female' : 'fas fa-user');
-                nameCell.innerHTML = `<i class="${genderIcon}" style="margin-right: 10px;"></i>${patient.name}`;
+                const avatarSrc = patient.avatar || 'https://i.imgur.com/O8bZ2XX.png';
+                nameCell.innerHTML = `<img src="${avatarSrc}" alt="Avatar" style="width: 30px; height: 30px; border-radius: 50%; margin-right: 10px;"><i class="${genderIcon}" style="margin-right: 10px;"></i>${patient.name}`;
                 nameCell.style.border = '1px solid #ddd';
                 nameCell.style.padding = '10px';
 
@@ -394,15 +410,32 @@
 
             const newPatient = {
                 id: 'P' + Math.floor(Math.random() * 1000),
-                name: nameInput.value,
-                age: ageInput.value,
-                gender: document.getElementById('gender').value,
-                contact: contactInput.value,
-                problem: document.getElementById('problem').value,
-                address: document.getElementById('address').value
+                name: DOMPurify.sanitize(nameInput.value),
+                age: DOMPurify.sanitize(ageInput.value),
+                gender: DOMPurify.sanitize(document.getElementById('gender').value),
+                contact: DOMPurify.sanitize(contactInput.value),
+                problem: DOMPurify.sanitize(document.getElementById('problem').value),
+                address: DOMPurify.sanitize(document.getElementById('address').value),
+                avatar: ''
             };
 
-            patients.push(newPatient);
+            const avatarFile = document.getElementById('avatar').files[0];
+            if (avatarFile) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    newPatient.avatar = e.target.result;
+                    patients.push(newPatient);
+                    localStorage.setItem('patients', JSON.stringify(patients));
+                    renderPatients();
+                    setupPagination();
+                };
+                reader.readAsDataURL(avatarFile);
+            } else {
+                patients.push(newPatient);
+                localStorage.setItem('patients', JSON.stringify(patients));
+                renderPatients();
+                setupPagination();
+            }
             localStorage.setItem('patients', JSON.stringify(patients));
             renderPatients();
 
@@ -423,6 +456,25 @@
                 document.body.removeChild(toast);
             }, 3000);
         });
+
+        const form = document.getElementById('add-patient-form');
+        form.addEventListener('input', () => {
+            const formData = new FormData(form);
+            const data = {};
+            for (const [key, value] of formData.entries()) {
+                data[key] = value;
+            }
+            localStorage.setItem('patientFormDraft', JSON.stringify(data));
+        });
+
+        const draft = JSON.parse(localStorage.getItem('patientFormDraft'));
+        if (draft) {
+            for (const key in draft) {
+                if (form.elements[key]) {
+                    form.elements[key].value = draft[key];
+                }
+            }
+        }
 
         renderPatients();
         setupPagination();
