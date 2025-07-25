@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Our Services</title>
+    <title>Service Details</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
-<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
+<body>
     <header class="bg-light shadow-sm">
         <div class="container d-flex justify-content-between align-items-center py-2">
             <a href="index.html" class="d-flex align-items-center text-dark text-decoration-none">
                 <img src="https://i.imgur.com/O8bZ2XX.png" alt="Logo" style="height: 50px; margin-right: 10px;">
-                <h1 class="h4 mb-0">Our Services</h1>
+                <h1 class="h4 mb-0" id="service-title">Service Details</h1>
             </a>
-            <form class="d-flex" id="search-form">
-                <input class="form-control me-2" type="search" id="search-input-header" placeholder="Search" aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Search</button>
+            <form class="d-flex">
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
             </form>
         </div>
     </header>
@@ -57,34 +56,28 @@
     </nav>
 
     <main class="container py-5">
-        <section class="card shadow-sm">
-            <div class="card-header">
-                <h2 class="h5 mb-0">Our Medical Services</h2>
+        <div class="p-5 mb-4 bg-light rounded-3">
+            <div class="container-fluid py-5">
+                <h1 class="display-5 fw-bold" id="service-heading"></h1>
+                <p class="col-md-8 fs-4" id="service-description"></p>
             </div>
-            <div class="card-body">
-                <div class="list-group">
-                    <a href="service-details.html?service=Cardiology" class="list-group-item list-group-item-action">Cardiology</a>
-                    <a href="service-details.html?service=Neurology" class="list-group-item list-group-item-action">Neurology</a>
-                    <a href="service-details.html?service=Oncology" class="list-group-item list-group-item-action">Oncology</a>
-                    <a href="service-details.html?service=Pediatrics" class="list-group-item list-group-item-action">Pediatrics</a>
-                    <a href="service-details.html?service=Orthopedics" class="list-group-item list-group-item-action">Orthopedics</a>
-                    <a href="service-details.html?service=Emergency%20Care" class="list-group-item list-group-item-action">Emergency Care</a>
-                </div>
-            </div>
-        </section>
+        </div>
     </main>
 
-    <footer style="background-color: #333; color: #fff; text-align: center; padding: 1rem 0; width: 100%;">
+    <footer class="bg-dark text-white text-center py-3">
         <p>&copy; 2025 Hospital Management System. All rights reserved.</p>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-        document.getElementById('search-form').addEventListener('submit', function(event) {
-            event.preventDefault();
-            const searchQuery = document.getElementById('search-input-header').value;
-            // Implement search functionality for services here
-        });
+        const urlParams = new URLSearchParams(window.location.search);
+        const service = urlParams.get('service');
+
+        if (service) {
+            document.getElementById('service-title').textContent = service;
+            document.getElementById('service-heading').textContent = service;
+            document.getElementById('service-description').textContent = `Details about our ${service} services.`;
+        }
     </script>
 </body>
 </html>
