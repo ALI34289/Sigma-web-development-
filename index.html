@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Management System</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
 </head>
 <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
 
@@ -203,16 +204,18 @@
         </section>
         <section class="testimonials" style="padding: 50px 20px; text-align: center; background-color: #f9f9f9;">
             <h2 style="font-size: 2.5rem; margin-bottom: 40px;">What Our Patients Say</h2>
-            <div class="testimonial-slider" style="max-width: 800px; margin: 0 auto; overflow: hidden; position: relative;">
-                <div class="slides" style="display: flex; transition: transform 0.5s ease-in-out;">
-                    <div class="slide" style="min-width: 100%; box-sizing: border-box; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+            <div class="swiper-container" style="max-width: 800px; margin: 0 auto; overflow: hidden; position: relative;">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide" style="min-width: 100%; box-sizing: border-box; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <img src="https://i.imgur.com/2Y2JQW1.png" alt="Patient 1" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 20px;">
                         <p style="font-style: italic;">"The doctors and staff were amazing. I felt well-cared for throughout my stay."</p>
                         <div class="rating" style="color: #ffc107; margin-top: 10px;">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
                         </div>
                         <p style="margin-top: 10px; font-weight: bold;">- John Doe</p>
                     </div>
-                    <div class="slide" style="min-width: 100%; box-sizing: border-box; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                    <div class="swiper-slide" style="min-width: 100%; box-sizing: border-box; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <img src="https://i.imgur.com/cZ3YQ2r.png" alt="Patient 2" style="width: 80px; height: 80px; border-radius: 50%; margin-bottom: 20px;">
                         <p style="font-style: italic;">"I am so grateful for the care I received. The facilities are top-notch."</p>
                         <div class="rating" style="color: #ffc107; margin-top: 10px;">
                             <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
@@ -220,8 +223,7 @@
                         <p style="margin-top: 10px; font-weight: bold;">- Jane Smith</p>
                     </div>
                 </div>
-                <button class="prev" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background-color: #007bff; color: #fff; border: none; padding: 10px; border-radius: 50%; cursor: pointer;">&#10094;</button>
-                <button class="next" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background-color: #007bff; color: #fff; border: none; padding: 10px; border-radius: 50%; cursor: pointer;">&#10095;</button>
+                <div class="swiper-pagination"></div>
             </div>
         </section>
         <section class="health-tips" style="padding: 50px 20px; text-align: center;">
@@ -255,12 +257,33 @@
                 <a href="#" class="btn" style="background-color: #ffc107; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-size: 1.2rem;">🔔 Get Health Alerts on WhatsApp</a>
             </div>
         </section>
+        <section class="counter-section" style="padding: 50px 20px; text-align: center; background-color: #f9f9f9;">
+            <div class="counters" style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap;">
+                <div class="counter">
+                    <h3 class="count" data-target="15" style="font-size: 3rem; margin-bottom: 10px;">0</h3>
+                    <p style="font-size: 1.2rem;">Years of Service</p>
+                </div>
+                <div class="counter">
+                    <h3 class="count" data-target="1000" style="font-size: 3rem; margin-bottom: 10px;">0</h3>
+                    <p style="font-size: 1.2rem;">Successful Surgeries</p>
+                </div>
+                <div class="counter">
+                    <h3 class="count" data-target="500" style="font-size: 3rem; margin-bottom: 10px;">0</h3>
+                    <p style="font-size: 1.2rem;">Happy Patients</p>
+                </div>
+            </div>
+        </section>
+        <div class="floating-buttons" style="position: fixed; bottom: 20px; right: 20px; z-index: 1000;">
+            <a href="tel:102" style="background-color: #dc3545; color: #fff; padding: 15px; border-radius: 50%; margin-right: 10px; text-decoration: none;"><i class="fas fa-phone-alt"></i></a>
+            <a href="https://wa.me/1234567890" target="_blank" style="background-color: #25d366; color: #fff; padding: 15px; border-radius: 50%; text-decoration: none;"><i class="fab fa-whatsapp"></i></a>
+        </div>
     </main>
 
     <footer style="background-color: #333; color: #fff; text-align: center; padding: 1rem 0; width: 100%;">
         <p>&copy; 2025 Hospital Management System. All rights reserved.</p>
     </footer>
 
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
     <script>
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
@@ -290,6 +313,41 @@
         document.querySelector('.prev').addEventListener('click', () => {
             slideIndex = (slideIndex - 1 + 2) % 2;
             slides.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+        });
+
+        const counters = document.querySelectorAll('.count');
+        const speed = 200;
+
+        counters.forEach(counter => {
+            const updateCount = () => {
+                const target = +counter.getAttribute('data-target');
+                const count = +counter.innerText;
+
+                const inc = target / speed;
+
+                if (count < target) {
+                    counter.innerText = Math.ceil(count + inc);
+                    setTimeout(updateCount, 1);
+                } else {
+                    counter.innerText = target;
+                }
+            };
+
+            updateCount();
+        });
+
+        var swiper = new Swiper('.swiper-container', {
+            slidesPerView: 1,
+            spaceBetween: 30,
+            loop: true,
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            autoplay: {
+                delay: 2500,
+                disableOnInteraction: false,
+            },
         });
     </script>
 </body>
