@@ -3,87 +3,90 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Appointments - Evergreen General Hospital</title>
+    <title>Appointment Scheduling</title>
 </head>
-<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f8ff;">
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
 
-    <header style="background-color: #4682b4; color: white; padding: 1rem; text-align: center;">
-        <h1>Evergreen General Hospital</h1>
-        <p>Your Health, Our Priority</p>
+    <header style="background-color: #333; color: #fff; padding: 1rem 0; text-align: center;">
+        <h1>Appointment Scheduling</h1>
     </header>
 
-    <nav style="background-color: #5f9ea0; padding: 1rem; text-align: center;">
-        <a href="index.html" style="color: white; text-decoration: none; margin: 0 15px;">Home</a>
-        <a href="about.html" style="color: white; text-decoration: none; margin: 0 15px;">About Us</a>
-        <a href="departments.html" style="color: white; text-decoration: none; margin: 0 15px;">Departments</a>
-        <a href="doctors.html" style="color: white; text-decoration: none; margin: 0 15px;">Doctors</a>
-        <a href="appointments.html" style="color: white; text-decoration: none; margin: 0 15px;">Appointments</a>
-        <a href="contact.html" style="color: white; text-decoration: none; margin: 0 15px;">Contact Us</a>
-        <a href="dashboard.html" style="color: white; text-decoration: none; margin: 0 15px;">Dashboard</a>
+    <nav style="background-color: #444; padding: 1rem;">
+        <ul style="list-style: none; margin: 0; padding: 0; text-align: center;">
+            <li style="display: inline; margin-right: 20px;"><a href="index.html" style="color: #fff; text-decoration: none;">Home</a></li>
+            <li style="display: inline; margin-right: 20px;"><a href="patients.html" style="color: #fff; text-decoration: none;">Patients</a></li>
+            <li style="display: inline; margin-right: 20px;"><a href="doctors.html" style="color: #fff; text-decoration: none;">Doctors</a></li>
+            <li style="display: inline; margin-right: 20px;"><a href="appointments.html" style="color: #fff; text-decoration: none;">Appointments</a></li>
+            <li style="display: inline;"><a href="services.html" style="color: #fff; text-decoration: none;">Services</a></li>
+        </ul>
     </nav>
 
-    <main style="padding: 2rem;">
-        <section id="appointment-form" style="padding: 40px 20px; max-width: 600px; margin: auto; background-color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
-            <h2 style="font-size: 2rem; color: #4682b4; text-align: center;">Book an Appointment</h2>
-            <form onsubmit="return validateForm()">
-                <div style="margin-bottom: 15px;">
-                    <label for="name" style="display: block; margin-bottom: 5px;">Full Name</label>
-                    <input type="text" id="name" name="name" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label for="email" style="display: block; margin-bottom: 5px;">Email</label>
-                    <input type="email" id="email" name="email" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label for="phone" style="display: block; margin-bottom: 5px;">Phone Number</label>
-                    <input type="tel" id="phone" name="phone" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label for="date" style="display: block; margin-bottom: 5px;">Preferred Date</label>
-                    <input type="date" id="date" name="date" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label for="department" style="display: block; margin-bottom: 5px;">Department</label>
-                    <select id="department" name="department" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;">
-                        <option value="">Select a Department</option>
-                        <option value="cardiology">Cardiology</option>
-                        <option value="neurology">Neurology</option>
-                        <option value="pediatrics">Pediatrics</option>
-                    </select>
-                </div>
-                <div style="margin-bottom: 15px;">
-                    <label for="message" style="display: block; margin-bottom: 5px;">Reason for Visit</label>
-                    <textarea id="message" name="message" rows="4" required style="width: 100%; padding: 8px; border: 1px solid #ccc; border-radius: 5px;"></textarea>
-                </div>
-                <button type="submit" style="background-color: #4682b4; color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; width: 100%;">Submit Request</button>
+    <main style="padding: 20px;">
+        <section id="schedule-appointment" style="background-color: #fff; padding: 20px; margin-bottom: 20px; border-radius: 5px;">
+            <h2 style="color: #333;">Schedule New Appointment</h2>
+            <form id="schedule-appointment-form">
+                <label for="patient" style="display: block; margin-bottom: 5px;">Patient:</label>
+                <input type="text" id="patient" name="patient" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #ddd;">
+
+                <label for="doctor" style="display: block; margin-bottom: 5px;">Doctor:</label>
+                <input type="text" id="doctor" name="doctor" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #ddd;">
+
+                <label for="date" style="display: block; margin-bottom: 5px;">Date:</label>
+                <input type="date" id="date" name="date" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #ddd;">
+
+                <button type="submit" style="background-color: #333; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer;">Schedule Appointment</button>
             </form>
+        </section>
+
+        <section id="appointment-list" style="background-color: #fff; padding: 20px; border-radius: 5px;">
+            <h2 style="color: #333;">Appointment List</h2>
+            <table style="width: 100%; border-collapse: collapse;">
+                <thead>
+                    <tr style="background-color: #f2f2f2;">
+                        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Patient</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Doctor</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Date</th>
+                    </tr>
+                </thead>
+                <tbody id="appointment-table-body">
+                    <!-- Appointment data will be inserted here by JavaScript -->
+                </tbody>
+            </table>
         </section>
     </main>
 
-    <footer style="background-color: #4682b4; color: white; text-align: center; padding: 1rem; position: relative; bottom: 0; width: 100%;">
-        <p>&copy; 2024 Evergreen General Hospital. All rights reserved.</p>
-        <p>
-            <a href="#" style="color: white; text-decoration: none; margin: 0 10px;">Facebook</a> |
-            <a href="#" style="color: white; text-decoration: none; margin: 0 10px;">Twitter</a> |
-            <a href="#" style="color: white; text-decoration: none; margin: 0 10px;">Instagram</a>
-        </p>
+    <footer style="background-color: #333; color: #fff; text-align: center; padding: 1rem 0; position: fixed; bottom: 0; width: 100%;">
+        <p>&copy; 2025 Hospital Management System. All rights reserved.</p>
     </footer>
 
     <script>
-        function validateForm() {
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const phone = document.getElementById('phone').value;
-            const date = document.getElementById('date').value;
-            const department = document.getElementById('department').value;
-            if (name === "" || email === "" || phone === "" || date === "" || department === "") {
-                alert("Please fill out all required fields.");
-                return false;
-            }
-            alert("Appointment request submitted successfully!");
-            return true;
-        }
-    </script>
+        document.getElementById('schedule-appointment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
 
+            const patient = document.getElementById('patient').value;
+            const doctor = document.getElementById('doctor').value;
+            const date = document.getElementById('date').value;
+
+            const tableBody = document.getElementById('appointment-table-body');
+            const newRow = tableBody.insertRow();
+
+            const patientCell = newRow.insertCell();
+            patientCell.textContent = patient;
+            patientCell.style.border = '1px solid #ddd';
+            patientCell.style.padding = '10px';
+
+            const doctorCell = newRow.insertCell();
+            doctorCell.textContent = doctor;
+            doctorCell.style.border = '1px solid #ddd';
+            doctorCell.style.padding = '10px';
+
+            const dateCell = newRow.insertCell();
+            dateCell.textContent = date;
+            dateCell.style.border = '1px solid #ddd';
+            dateCell.style.padding = '10px';
+
+            document.getElementById('schedule-appointment-form').reset();
+        });
+    </script>
 </body>
 </html>
