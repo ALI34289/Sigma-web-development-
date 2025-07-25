@@ -71,6 +71,18 @@
                         <label for="specialty" class="form-label">Specialty</label>
                         <input type="text" id="specialty" name="specialty" class="form-control" required>
                     </div>
+                    <div class="mb-3">
+                        <label for="education" class="form-label">Education</label>
+                        <input type="text" id="education" name="education" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="affiliations" class="form-label">Affiliations</label>
+                        <input type="text" id="affiliations" name="affiliations" class="form-control" required>
+                    </div>
+                    <div class="mb-3">
+                        <label for="photo" class="form-label">Photo</label>
+                        <input type="file" id="photo" name="photo" class="form-control" accept="image/*">
+                    </div>
                     <button type="submit" class="btn btn-primary">Add Doctor</button>
                 </form>
             </div>
@@ -83,13 +95,27 @@
             <div class="card-body">
                 <div class="table-responsive">
                     <table class="table table-striped table-hover">
-                        <thead>
-                            <tr>
-                                <th>Name</th>
-                                <th>Specialty</th>
-                            </tr>
-                        </thead>
                         <tbody id="doctor-table-body">
+                            <!-- Doctor data will be rendered here as cards -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </section>
+    </main>
+    <style>
+        .doctor-card {
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 15px;
+            margin-bottom: 15px;
+        }
+        .doctor-card img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 5px;
+        }
+    </style>
                             <!-- Doctor data will be inserted here by JavaScript -->
                         </tbody>
                     </table>
@@ -141,24 +167,51 @@
             // Implement search functionality for doctors here
         });
 
+        let doctors = [];
+
+        function renderDoctors() {
+            const tableBody = document.getElementById('doctor-table-body');
+            tableBody.innerHTML = '';
+            doctors.forEach(doctor => {
+                const card = document.createElement('div');
+                card.className = 'doctor-card';
+                let photoHtml = '';
+                if (doctor.photo) {
+                    photoHtml = `<img src="${doctor.photo}" alt="Photo of ${doctor.name}" class="mb-3">`;
+                }
+                card.innerHTML = `
+                    ${photoHtml}
+                    <h3>${doctor.name}</h3>
+                    <p><strong>Specialty:</strong> ${doctor.specialty}</p>
+                    <p><strong>Education:</strong> ${doctor.education}</p>
+                    <p><strong>Affiliations:</strong> ${doctor.affiliations}</p>
+                `;
+                tableBody.appendChild(card);
+            });
+        }
+
         document.getElementById('add-doctor-form').addEventListener('submit', function(event) {
             event.preventDefault();
 
             const name = document.getElementById('name').value;
             const specialty = document.getElementById('specialty').value;
+            const education = document.getElementById('education').value;
+            const affiliations = document.getElementById('affiliations').value;
+            const photoInput = document.getElementById('photo');
+            const newDoctor = { name, specialty, education, affiliations, photo: '' };
 
-            const tableBody = document.getElementById('doctor-table-body');
-            const newRow = tableBody.insertRow();
-
-            const nameCell = newRow.insertCell();
-            nameCell.textContent = name;
-            nameCell.style.border = '1px solid #ddd';
-            nameCell.style.padding = '10px';
-
-            const specialtyCell = newRow.insertCell();
-            specialtyCell.textContent = specialty;
-            specialtyCell.style.border = '1px solid #ddd';
-            specialtyCell.style.padding = '10px';
+            if (photoInput.files[0]) {
+                const reader = new FileReader();
+                reader.onload = function(e) {
+                    newDoctor.photo = e.target.result;
+                    doctors.push(newDoctor);
+                    renderDoctors();
+                };
+                reader.readAsDataURL(photoInput.files[0]);
+            } else {
+                doctors.push(newDoctor);
+                renderDoctors();
+            }
 
             document.getElementById('add-doctor-form').reset();
         });
