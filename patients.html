@@ -59,13 +59,13 @@
                 <label for="avatar" style="display: block; margin-bottom: 5px;">Patient Photo:</label>
                 <input type="file" id="avatar" name="avatar" accept="image/*" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #ddd;">
 
-                <button type="submit" style="background-color: #007bff; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer;">Add Patient</button>
+                <button type="submit" tabindex="0" style="background-color: #007bff; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer;">Add Patient</button>
             </form>
         </section>
 
         <section id="patient-list" style="background-color: #fff; padding: 20px; border-radius: 5px;">
-            <button id="export-csv" style="background-color: #28a745; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer; margin-bottom: 20px;">Export to CSV</button>
-            <button id="print-report" style="background-color: #17a2b8; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer; margin-bottom: 20px;">Print Report</button>
+            <button id="export-csv" tabindex="0" style="background-color: #28a745; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer; margin-bottom: 20px;">Export to CSV</button>
+            <button id="print-report" tabindex="0" style="background-color: #17a2b8; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer; margin-bottom: 20px;">Print Report</button>
             <h2 style="color: #333;">Patient List</h2>
             <table id="patient-table" style="width: 100%; border-collapse: collapse;">
                 <thead>
@@ -126,9 +126,37 @@
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.3/purify.min.js"></script>
     <script>
-        let patients = JSON.parse(localStorage.getItem('patients')) || [];
+        const api = {
+            getPatients: async () => {
+                return JSON.parse(localStorage.getItem('patients')) || [];
+            },
+            addPatient: async (patient) => {
+                const patients = await api.getPatients();
+                patients.push(patient);
+                localStorage.setItem('patients', JSON.stringify(patients));
+                return patient;
+            },
+            deletePatient: async (patientId) => {
+                let patients = await api.getPatients();
+                patients = patients.filter(p => p.id !== patientId);
+                localStorage.setItem('patients', JSON.stringify(patients));
+            },
+            updatePatient: async (updatedPatient) => {
+                let patients = await api.getPatients();
+                patients = patients.map(p => p.id === updatedPatient.id ? updatedPatient : p);
+                localStorage.setItem('patients', JSON.stringify(patients));
+            }
+        };
+
+        let patients = [];
         let currentPage = 1;
         const rowsPerPage = 5;
+
+        async function init() {
+            patients = await api.getPatients();
+            renderPatients();
+            setupPagination();
+        }
 
         function renderPatients() {
             const tableBody = document.getElementById('patient-table-body');
@@ -185,7 +213,8 @@
                 const editButton = document.createElement('button');
                 editButton.innerHTML = '<i class="fas fa-edit"></i>';
                 editButton.style.marginRight = '5px';
-                editButton.onclick = function() {
+                editButton.setAttribute('tabindex', '0');
+                editButton.onclick = async function() {
                     document.getElementById('name').value = patient.name;
                     document.getElementById('age').value = patient.age;
                     document.getElementById('gender').value = patient.gender;
@@ -193,18 +222,17 @@
                     document.getElementById('problem').value = patient.problem;
                     document.getElementById('address').value = patient.address;
 
-                    patients = patients.filter(p => p.id !== patient.id);
-                    localStorage.setItem('patients', JSON.stringify(patients));
-                    renderPatients();
+                    await api.deletePatient(patient.id);
+                    init();
                 };
                 actionsCell.appendChild(editButton);
 
                 const deleteButton = document.createElement('button');
                 deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
-                deleteButton.onclick = function() {
-                    patients = patients.filter(p => p.id !== patient.id);
-                    localStorage.setItem('patients', JSON.stringify(patients));
-                    renderPatients();
+                deleteButton.setAttribute('tabindex', '0');
+                deleteButton.onclick = async function() {
+                    await api.deletePatient(patient.id);
+                    init();
                 };
                 actionsCell.appendChild(deleteButton);
             });
@@ -360,7 +388,7 @@
             });
         }
 
-        document.getElementById('add-patient-form').addEventListener('submit', function(event) {
+        document.getElementById('add-patient-form').addEventListener('submit', async function(event) {
             event.preventDefault();
 
             const nameInput = document.getElementById('name');
@@ -422,24 +450,19 @@
             const avatarFile = document.getElementById('avatar').files[0];
             if (avatarFile) {
                 const reader = new FileReader();
-                reader.onload = function(e) {
+                reader.onload = async function(e) {
                     newPatient.avatar = e.target.result;
-                    patients.push(newPatient);
-                    localStorage.setItem('patients', JSON.stringify(patients));
-                    renderPatients();
-                    setupPagination();
+                    await api.addPatient(newPatient);
+                    init();
                 };
                 reader.readAsDataURL(avatarFile);
             } else {
-                patients.push(newPatient);
-                localStorage.setItem('patients', JSON.stringify(patients));
-                renderPatients();
-                setupPagination();
+                await api.addPatient(newPatient);
+                init();
             }
-            localStorage.setItem('patients', JSON.stringify(patients));
-            renderPatients();
 
             document.getElementById('add-patient-form').reset();
+            localStorage.removeItem('patientFormDraft');
 
             const toast = document.createElement('div');
             toast.textContent = 'Patient added successfully!';
@@ -476,8 +499,7 @@
             }
         }
 
-        renderPatients();
-        setupPagination();
+        init();
     </script>
 </body>
 </html>
