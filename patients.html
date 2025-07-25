@@ -14,8 +14,9 @@
                 <img src="https://i.imgur.com/O8bZ2XX.png" alt="Logo" style="height: 50px; margin-right: 10px;">
                 <h1 class="h4 mb-0">Patient Management</h1>
             </a>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" id="search-input" placeholder="Search" aria-label="Search">
+            <form class="d-flex" id="search-form">
+                <input class="form-control me-2" type="search" id="search-input-header" placeholder="Search" aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
     </header>
@@ -367,7 +368,7 @@
             });
         }
 
-        document.getElementById('search-input').addEventListener('keyup', function(event) {
+        document.getElementById('search-input-header').addEventListener('keyup', function(event) {
             const searchQuery = event.target.value.toLowerCase();
             const filteredPatients = patients.filter(patient => {
                 return (

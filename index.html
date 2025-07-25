@@ -16,8 +16,8 @@
                 <img src="https://i.imgur.com/O8bZ2XX.png" alt="Logo" style="height: 50px; margin-right: 10px;">
                 <h1 class="h4 mb-0">Hospital Management</h1>
             </a>
-            <form class="d-flex">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" id="search-form">
+                <input class="form-control me-2" type="search" id="search-input-header" placeholder="Search" aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>
@@ -384,6 +384,12 @@
             };
 
             updateCount();
+        });
+
+        document.getElementById('search-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const searchQuery = document.getElementById('search-input-header').value;
+            window.location.href = `patients.html?search=${searchQuery}`;
         });
 
         var swiper = new Swiper('.swiper-container', {
