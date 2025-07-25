@@ -15,8 +15,7 @@
                 <h1 style="margin: 0;">Patient Management</h1>
             </div>
             <div style="display: flex; align-items: center;">
-                <input type="text" placeholder="Search..." style="padding: 8px; border-radius: 3px; border: 1px solid #ddd; margin-right: 10px;">
-                <button style="background-color: #007bff; color: #fff; padding: 8px 12px; border: none; border-radius: 3px; cursor: pointer;">Search</button>
+                <input type="text" id="search-input" placeholder="Search..." style="padding: 8px; border-radius: 3px; border: 1px solid #ddd; margin-right: 10px;">
             </div>
         </div>
     </header>
@@ -51,20 +50,29 @@
                 <label for="contact" style="display: block; margin-bottom: 5px;">Contact:</label>
                 <input type="text" id="contact" name="contact" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #ddd;">
 
+                <label for="problem" style="display: block; margin-bottom: 5px;">Problem:</label>
+                <textarea id="problem" name="problem" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #ddd;"></textarea>
+
+                <label for="address" style="display: block; margin-bottom: 5px;">Permanent Address:</label>
+                <textarea id="address" name="address" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #ddd;"></textarea>
+
                 <button type="submit" style="background-color: #007bff; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer;">Add Patient</button>
             </form>
         </section>
 
         <section id="patient-list" style="background-color: #fff; padding: 20px; border-radius: 5px;">
+            <button id="export-csv" style="background-color: #28a745; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer; margin-bottom: 20px;">Export to CSV</button>
             <h2 style="color: #333;">Patient List</h2>
             <table style="width: 100%; border-collapse: collapse;">
                 <thead>
                     <tr style="background-color: #f2f2f2;">
                         <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Patient ID</th>
-                        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Name</th>
-                        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Age</th>
+                        <th id="sort-name" style="padding: 10px; border: 1px solid #ddd; text-align: left; cursor: pointer;">Name</th>
+                        <th id="sort-age" style="padding: 10px; border: 1px solid #ddd; text-align: left; cursor: pointer;">Age</th>
                         <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Gender</th>
                         <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Contact</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Problem</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Permanent Address</th>
                         <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Actions</th>
                     </tr>
                 </thead>
@@ -72,6 +80,7 @@
                     <!-- Patient data will be inserted here by JavaScript -->
                 </tbody>
             </table>
+            <div id="pagination" style="margin-top: 20px; text-align: center;"></div>
         </section>
     </main>
 
@@ -113,11 +122,18 @@
 
     <script>
         let patients = JSON.parse(localStorage.getItem('patients')) || [];
+        let currentPage = 1;
+        const rowsPerPage = 5;
 
         function renderPatients() {
             const tableBody = document.getElementById('patient-table-body');
             tableBody.innerHTML = '';
-            patients.forEach(patient => {
+
+            const startIndex = (currentPage - 1) * rowsPerPage;
+            const endIndex = startIndex + rowsPerPage;
+            const paginatedPatients = patients.slice(startIndex, endIndex);
+
+            paginatedPatients.forEach(patient => {
                 const newRow = tableBody.insertRow();
 
                 const patientIdCell = newRow.insertCell();
@@ -145,6 +161,165 @@
                 contactCell.textContent = patient.contact;
                 contactCell.style.border = '1px solid #ddd';
                 contactCell.style.padding = '10px';
+
+                const problemCell = newRow.insertCell();
+                problemCell.textContent = patient.problem;
+                problemCell.style.border = '1px solid #ddd';
+                problemCell.style.padding = '10px';
+
+                const addressCell = newRow.insertCell();
+                addressCell.textContent = patient.address;
+                addressCell.style.border = '1px solid #ddd';
+                addressCell.style.padding = '10px';
+
+                const actionsCell = newRow.insertCell();
+                actionsCell.style.border = '1px solid #ddd';
+                actionsCell.style.padding = '10px';
+
+                const editButton = document.createElement('button');
+                editButton.innerHTML = '<i class="fas fa-edit"></i>';
+                editButton.style.marginRight = '5px';
+                editButton.onclick = function() {
+                    document.getElementById('name').value = patient.name;
+                    document.getElementById('age').value = patient.age;
+                    document.getElementById('gender').value = patient.gender;
+                    document.getElementById('contact').value = patient.contact;
+                    document.getElementById('problem').value = patient.problem;
+                    document.getElementById('address').value = patient.address;
+
+                    patients = patients.filter(p => p.id !== patient.id);
+                    localStorage.setItem('patients', JSON.stringify(patients));
+                    renderPatients();
+                };
+                actionsCell.appendChild(editButton);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteButton.onclick = function() {
+                    patients = patients.filter(p => p.id !== patient.id);
+                    localStorage.setItem('patients', JSON.stringify(patients));
+                    renderPatients();
+                };
+                actionsCell.appendChild(deleteButton);
+            });
+        }
+
+        document.getElementById('search-input').addEventListener('keyup', function(event) {
+            const searchQuery = event.target.value.toLowerCase();
+            const filteredPatients = patients.filter(patient => {
+                return (
+                    patient.name.toLowerCase().includes(searchQuery) ||
+                    patient.id.toLowerCase().includes(searchQuery) ||
+                    patient.gender.toLowerCase().includes(searchQuery)
+                );
+            });
+            renderFilteredPatients(filteredPatients);
+        });
+
+        let sortDirection = {
+            name: 'asc',
+            age: 'asc'
+        };
+
+        document.getElementById('sort-name').addEventListener('click', () => {
+            sortDirection.name = sortDirection.name === 'asc' ? 'desc' : 'asc';
+            patients.sort((a, b) => {
+                const nameA = a.name.toUpperCase();
+                const nameB = b.name.toUpperCase();
+                if (nameA < nameB) {
+                    return sortDirection.name === 'asc' ? -1 : 1;
+                }
+                if (nameA > nameB) {
+                    return sortDirection.name === 'asc' ? 1 : -1;
+                }
+                return 0;
+            });
+            renderPatients();
+        });
+
+        document.getElementById('export-csv').addEventListener('click', () => {
+            const headers = ['Patient ID', 'Name', 'Age', 'Gender', 'Contact', 'Problem', 'Permanent Address'];
+            let csvContent = 'data:text/csv;charset=utf-8,' + headers.join(',') + '\n';
+
+            patients.forEach(patient => {
+                const row = [patient.id, patient.name, patient.age, patient.gender, patient.contact, patient.problem, patient.address];
+                csvContent += row.join(',') + '\n';
+            });
+
+            const encodedUri = encodeURI(csvContent);
+            const link = document.createElement('a');
+            link.setAttribute('href', encodedUri);
+            link.setAttribute('download', 'patients.csv');
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+        });
+
+        document.getElementById('sort-age').addEventListener('click', () => {
+            sortDirection.age = sortDirection.age === 'asc' ? 'desc' : 'asc';
+            patients.sort((a, b) => {
+                return sortDirection.age === 'asc' ? a.age - b.age : b.age - a.age;
+            });
+            renderPatients();
+        });
+
+        function setupPagination() {
+            const paginationContainer = document.getElementById('pagination');
+            paginationContainer.innerHTML = '';
+            const pageCount = Math.ceil(patients.length / rowsPerPage);
+
+            for (let i = 1; i <= pageCount; i++) {
+                const button = document.createElement('button');
+                button.innerText = i;
+                button.addEventListener('click', () => {
+                    currentPage = i;
+                    renderPatients();
+                });
+                paginationContainer.appendChild(button);
+            }
+        }
+
+        function renderFilteredPatients(filteredPatients) {
+            const tableBody = document.getElementById('patient-table-body');
+            tableBody.innerHTML = '';
+            filteredPatients.forEach(patient => {
+                const newRow = tableBody.insertRow();
+
+                const patientIdCell = newRow.insertCell();
+                patientIdCell.textContent = patient.id;
+                patientIdCell.style.border = '1px solid #ddd';
+                patientIdCell.style.padding = '10px';
+
+                const nameCell = newRow.insertCell();
+                const genderIcon = patient.gender === 'male' ? 'fas fa-male' : (patient.gender === 'female' ? 'fas fa-female' : 'fas fa-user');
+                nameCell.innerHTML = `<i class="${genderIcon}" style="margin-right: 10px;"></i>${patient.name}`;
+                nameCell.style.border = '1px solid #ddd';
+                nameCell.style.padding = '10px';
+
+                const ageCell = newRow.insertCell();
+                ageCell.textContent = patient.age;
+                ageCell.style.border = '1px solid #ddd';
+                ageCell.style.padding = '10px';
+
+                const genderCell = newRow.insertCell();
+                genderCell.textContent = patient.gender;
+                genderCell.style.border = '1px solid #ddd';
+                genderCell.style.padding = '10px';
+
+                const contactCell = newRow.insertCell();
+                contactCell.textContent = patient.contact;
+                contactCell.style.border = '1px solid #ddd';
+                contactCell.style.padding = '10px';
+
+                const problemCell = newRow.insertCell();
+                problemCell.textContent = patient.problem;
+                problemCell.style.border = '1px solid #ddd';
+                problemCell.style.padding = '10px';
+
+                const addressCell = newRow.insertCell();
+                addressCell.textContent = patient.address;
+                addressCell.style.border = '1px solid #ddd';
+                addressCell.style.padding = '10px';
 
                 const actionsCell = newRow.insertCell();
                 actionsCell.style.border = '1px solid #ddd';
@@ -222,7 +397,9 @@
                 name: nameInput.value,
                 age: ageInput.value,
                 gender: document.getElementById('gender').value,
-                contact: contactInput.value
+                contact: contactInput.value,
+                problem: document.getElementById('problem').value,
+                address: document.getElementById('address').value
             };
 
             patients.push(newPatient);
@@ -248,6 +425,7 @@
         });
 
         renderPatients();
+        setupPagination();
     </script>
 </body>
 </html>
