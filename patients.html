@@ -112,6 +112,63 @@
     </footer>
 
     <script>
+        let patients = JSON.parse(localStorage.getItem('patients')) || [];
+
+        function renderPatients() {
+            const tableBody = document.getElementById('patient-table-body');
+            tableBody.innerHTML = '';
+            patients.forEach(patient => {
+                const newRow = tableBody.insertRow();
+
+                const patientIdCell = newRow.insertCell();
+                patientIdCell.textContent = patient.id;
+                patientIdCell.style.border = '1px solid #ddd';
+                patientIdCell.style.padding = '10px';
+
+                const nameCell = newRow.insertCell();
+                const genderIcon = patient.gender === 'male' ? 'fas fa-male' : (patient.gender === 'female' ? 'fas fa-female' : 'fas fa-user');
+                nameCell.innerHTML = `<i class="${genderIcon}" style="margin-right: 10px;"></i>${patient.name}`;
+                nameCell.style.border = '1px solid #ddd';
+                nameCell.style.padding = '10px';
+
+                const ageCell = newRow.insertCell();
+                ageCell.textContent = patient.age;
+                ageCell.style.border = '1px solid #ddd';
+                ageCell.style.padding = '10px';
+
+                const genderCell = newRow.insertCell();
+                genderCell.textContent = patient.gender;
+                genderCell.style.border = '1px solid #ddd';
+                genderCell.style.padding = '10px';
+
+                const contactCell = newRow.insertCell();
+                contactCell.textContent = patient.contact;
+                contactCell.style.border = '1px solid #ddd';
+                contactCell.style.padding = '10px';
+
+                const actionsCell = newRow.insertCell();
+                actionsCell.style.border = '1px solid #ddd';
+                actionsCell.style.padding = '10px';
+
+                const editButton = document.createElement('button');
+                editButton.innerHTML = '<i class="fas fa-edit"></i>';
+                editButton.style.marginRight = '5px';
+                editButton.onclick = function() {
+                    // Add edit functionality here
+                };
+                actionsCell.appendChild(editButton);
+
+                const deleteButton = document.createElement('button');
+                deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+                deleteButton.onclick = function() {
+                    patients = patients.filter(p => p.id !== patient.id);
+                    localStorage.setItem('patients', JSON.stringify(patients));
+                    renderPatients();
+                };
+                actionsCell.appendChild(deleteButton);
+            });
+        }
+
         document.getElementById('add-patient-form').addEventListener('submit', function(event) {
             event.preventDefault();
 
@@ -143,66 +200,54 @@
             }
 
             if (!isValid) {
-                alert('Please fill in all required fields.');
+                const toast = document.createElement('div');
+                toast.textContent = 'Please fill in all required fields.';
+                toast.style.position = 'fixed';
+                toast.style.bottom = '20px';
+                toast.style.left = '50%';
+                toast.style.transform = 'translateX(-50%)';
+                toast.style.backgroundColor = '#dc3545';
+                toast.style.color = '#fff';
+                toast.style.padding = '10px 20px';
+                toast.style.borderRadius = '5px';
+                document.body.appendChild(toast);
+                setTimeout(() => {
+                    document.body.removeChild(toast);
+                }, 3000);
                 return;
             }
 
-            const name = nameInput.value;
-            const age = ageInput.value;
-            const gender = document.getElementById('gender').value;
-            const contact = contactInput.value;
-            const patientId = 'P' + Math.floor(Math.random() * 1000);
-
-            const tableBody = document.getElementById('patient-table-body');
-            const newRow = tableBody.insertRow();
-
-            const patientIdCell = newRow.insertCell();
-            patientIdCell.textContent = patientId;
-            patientIdCell.style.border = '1px solid #ddd';
-            patientIdCell.style.padding = '10px';
-
-            const nameCell = newRow.insertCell();
-            const genderIcon = gender === 'male' ? 'fas fa-male' : (gender === 'female' ? 'fas fa-female' : 'fas fa-user');
-            nameCell.innerHTML = `<i class="${genderIcon}" style="margin-right: 10px;"></i>${name}`;
-            nameCell.style.border = '1px solid #ddd';
-            nameCell.style.padding = '10px';
-
-            const ageCell = newRow.insertCell();
-            ageCell.textContent = age;
-            ageCell.style.border = '1px solid #ddd';
-            ageCell.style.padding = '10px';
-
-            const genderCell = newRow.insertCell();
-            genderCell.textContent = gender;
-            genderCell.style.border = '1px solid #ddd';
-            genderCell.style.padding = '10px';
-
-            const contactCell = newRow.insertCell();
-            contactCell.textContent = contact;
-            contactCell.style.border = '1px solid #ddd';
-            contactCell.style.padding = '10px';
-
-            const actionsCell = newRow.insertCell();
-            actionsCell.style.border = '1px solid #ddd';
-            actionsCell.style.padding = '10px';
-
-            const editButton = document.createElement('button');
-            editButton.innerHTML = '<i class="fas fa-edit"></i>';
-            editButton.style.marginRight = '5px';
-            editButton.onclick = function() {
-                // Add edit functionality here
+            const newPatient = {
+                id: 'P' + Math.floor(Math.random() * 1000),
+                name: nameInput.value,
+                age: ageInput.value,
+                gender: document.getElementById('gender').value,
+                contact: contactInput.value
             };
-            actionsCell.appendChild(editButton);
 
-            const deleteButton = document.createElement('button');
-            deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
-            deleteButton.onclick = function() {
-                tableBody.removeChild(newRow);
-            };
-            actionsCell.appendChild(deleteB         utton);
+            patients.push(newPatient);
+            localStorage.setItem('patients', JSON.stringify(patients));
+            renderPatients();
 
             document.getElementById('add-patient-form').reset();
+
+            const toast = document.createElement('div');
+            toast.textContent = 'Patient added successfully!';
+            toast.style.position = 'fixed';
+            toast.style.bottom = '20px';
+            toast.style.left = '50%';
+            toast.style.transform = 'translateX(-50%)';
+            toast.style.backgroundColor = '#28a745';
+            toast.style.color = '#fff';
+            toast.style.padding = '10px 20px';
+            toast.style.borderRadius = '5px';
+            document.body.appendChild(toast);
+            setTimeout(() => {
+                document.body.removeChild(toast);
+            }, 3000);
         });
+
+        renderPatients();
     </script>
 </body>
 </html>
