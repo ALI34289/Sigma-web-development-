@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Departments - Evergreen General Hospital</title>
+</head>
+<body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f0f8ff;">
+
+    <header style="background-color: #4682b4; color: white; padding: 1rem; text-align: center;">
+        <h1>Evergreen General Hospital</h1>
+        <p>Your Health, Our Priority</p>
+    </header>
+
+    <nav style="background-color: #5f9ea0; padding: 1rem; text-align: center;">
+        <a href="index.html" style="color: white; text-decoration: none; margin: 0 15px;">Home</a>
+        <a href="about.html" style="color: white; text-decoration: none; margin: 0 15px;">About Us</a>
+        <a href="departments.html" style="color: white; text-decoration: none; margin: 0 15px;">Departments</a>
+        <a href="doctors.html" style="color: white; text-decoration: none; margin: 0 15px;">Doctors</a>
+        <a href="appointments.html" style="color: white; text-decoration: none; margin: 0 15px;">Appointments</a>
+        <a href="contact.html" style="color: white; text-decoration: none; margin: 0 15px;">Contact Us</a>
+        <a href="dashboard.html" style="color: white; text-decoration: none; margin: 0 15px;">Dashboard</a>
+    </nav>
+
+    <main style="padding: 2rem;">
+        <section id="departments" style="padding: 40px 20px; text-align: center;">
+            <h2 style="font-size: 2.5rem; color: #4682b4;">Our Departments</h2>
+            <div id="department-tabs" style="display: flex; justify-content: center; margin-bottom: 20px;">
+                <button style="background-color: #5f9ea0; color: white; padding: 10px 20px; border: none; cursor: pointer;" onclick="showTab('cardiology')">Cardiology</button>
+                <button style="background-color: #5f9ea0; color: white; padding: 10px 20px; border: none; cursor: pointer;" onclick="showTab('neurology')">Neurology</button>
+                <button style="background-color: #5f9ea0; color: white; padding: 10px 20px; border: none; cursor: pointer;" onclick="showTab('pediatrics')">Pediatrics</button>
+            </div>
+            <div id="cardiology" class="tab-content" style="background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <h3 style="color: #5f9ea0;">Cardiology</h3>
+                <p>Our Cardiology department provides comprehensive care for heart-related conditions, from diagnosis to treatment and rehabilitation.</p>
+            </div>
+            <div id="neurology" class="tab-content" style="display: none; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <h3 style="color: #5f9ea0;">Neurology</h3>
+                <p>We offer advanced care for disorders of the nervous system, including the brain, spinal cord, and nerves.</p>
+            </div>
+            <div id="pediatrics" class="tab-content" style="display: none; background-color: white; padding: 20px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <h3 style="color: #5f9ea0;">Pediatrics</h3>
+                <p>Our pediatric team is dedicated to the health and well-being of children, providing a full range of services for your little ones.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer style="background-color: #4682b4; color: white; text-align: center; padding: 1rem; position: relative; bottom: 0; width: 100%;">
+        <p>&copy; 2024 Evergreen General Hospital. All rights reserved.</p>
+        <p>
+            <a href="#" style="color: white; text-decoration: none; margin: 0 10px;">Facebook</a> |
+            <a href="#" style="color: white; text-decoration: none; margin: 0 10px;">Twitter</a> |
+            <a href="#" style="color: white; text-decoration: none; margin: 0 10px;">Instagram</a>
+        </p>
+    </footer>
+
+    <script>
+        function showTab(tabName) {
+            var i;
+            var x = document.getElementsByClassName("tab-content");
+            for (i = 0; i < x.length; i++) {
+                x[i].style.display = "none";
+            }
+            document.getElementById(tabName).style.display = "block";
+        }
+    </script>
+
+</body>
+</html>
