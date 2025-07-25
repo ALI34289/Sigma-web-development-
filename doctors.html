@@ -4,20 +4,30 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Doctor Management</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
 
-    <header style="background-color: #333; color: #fff; padding: 1rem 0; text-align: center;">
-        <h1>Doctor Management</h1>
+    <header style="background-color: #fff; color: #333; padding: 1rem 0; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+            <div style="display: flex; align-items: center;">
+                <img src="https://i.imgur.com/O8bZ2XX.png" alt="Logo" style="height: 50px; margin-right: 10px;">
+                <h1 style="margin: 0;">Doctor Management</h1>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <input type="text" placeholder="Search..." style="padding: 8px; border-radius: 3px; border: 1px solid #ddd; margin-right: 10px;">
+                <button style="background-color: #007bff; color: #fff; padding: 8px 12px; border: none; border-radius: 3px; cursor: pointer;">Search</button>
+            </div>
+        </div>
     </header>
 
-    <nav style="background-color: #444; padding: 1rem;">
+    <nav style="background-color: #007bff; padding: 1rem;">
         <ul style="list-style: none; margin: 0; padding: 0; text-align: center;">
-            <li style="display: inline; margin-right: 20px;"><a href="index.html" style="color: #fff; text-decoration: none;">Home</a></li>
-            <li style="display: inline; margin-right: 20px;"><a href="patients.html" style="color: #fff; text-decoration: none;">Patients</a></li>
-            <li style="display: inline; margin-right: 20px;"><a href="doctors.html" style="color: #fff; text-decoration: none;">Doctors</a></li>
-            <li style="display: inline; margin-right: 20px;"><a href="appointments.html" style="color: #fff; text-decoration: none;">Appointments</a></li>
-            <li style="display: inline;"><a href="services.html" style="color: #fff; text-decoration: none;">Services</a></li>
+            <li style="display: inline; margin-right: 20px;"><a href="index.html" style="color: #fff; text-decoration: none;"><i class="fas fa-home"></i> Home</a></li>
+            <li style="display: inline; margin-right: 20px;"><a href="patients.html" style="color: #fff; text-decoration: none;"><i class="fas fa-user-injured"></i> Patients</a></li>
+            <li style="display: inline; margin-right: 20px;"><a href="doctors.html" style="color: #fff; text-decoration: none;"><i class="fas fa-user-md"></i> Doctors</a></li>
+            <li style="display: inline; margin-right: 20px;"><a href="appointments.html" style="color: #fff; text-decoration: none;"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+            <li style="display: inline;"><a href="services.html" style="color: #fff; text-decoration: none;"><i class="fas fa-concierge-bell"></i> Services</a></li>
         </ul>
     </nav>
 
@@ -31,7 +41,7 @@
                 <label for="specialty" style="display: block; margin-bottom: 5px;">Specialty:</label>
                 <input type="text" id="specialty" name="specialty" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #ddd;">
 
-                <button type="submit" style="background-color: #333; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer;">Add Doctor</button>
+                <button type="submit" style="background-color: #007bff; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer;">Add Doctor</button>
             </form>
         </section>
 
@@ -51,7 +61,7 @@
         </section>
     </main>
 
-    <footer style="background-color: #333; color: #fff; text-align: center; padding: 1rem 0; position: fixed; bottom: 0; width: 100%;">
+    <footer style="background-color: #333; color: #fff; text-align: center; padding: 1rem 0; width: 100%;">
         <p>&copy; 2025 Hospital Management System. All rights reserved.</p>
     </footer>
 

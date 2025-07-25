@@ -4,43 +4,293 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hospital Management System</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
 </head>
 <body style="font-family: Arial, sans-serif; margin: 0; padding: 0; background-color: #f4f4f4;">
 
-    <header style="background-color: #333; color: #fff; padding: 1rem 0; text-align: center;">
-        <h1>Hospital Management System</h1>
+    <header style="background-color: #fff; color: #333; padding: 1rem 0; text-align: center; position: sticky; top: 0; z-index: 1000; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <div style="display: flex; justify-content: space-between; align-items: center; padding: 0 20px;">
+            <div style="display: flex; align-items: center;">
+                <img src="https://i.imgur.com/O8bZ2XX.png" alt="Logo" style="height: 50px; margin-right: 10px;">
+                <h1 style="margin: 0;">Hospital Management</h1>
+            </div>
+            <div style="display: flex; align-items: center;">
+                <input type="text" placeholder="Search..." style="padding: 8px; border-radius: 3px; border: 1px solid #ddd; margin-right: 10px;">
+                <button style="background-color: #007bff; color: #fff; padding: 8px 12px; border: none; border-radius: 3px; cursor: pointer;">Search</button>
+            </div>
+        </div>
     </header>
 
-    <nav style="background-color: #444; padding: 1rem;">
+    <nav style="background-color: #007bff; padding: 1rem;">
         <ul style="list-style: none; margin: 0; padding: 0; text-align: center;">
-            <li style="display: inline; margin-right: 20px;"><a href="index.html" style="color: #fff; text-decoration: none;">Home</a></li>
-            <li style="display: inline; margin-right: 20px;"><a href="patients.html" style="color: #fff; text-decoration: none;">Patients</a></li>
-            <li style="display: inline; margin-right: 20px;"><a href="doctors.html" style="color: #fff; text-decoration: none;">Doctors</a></li>
-            <li style="display: inline; margin-right: 20px;"><a href="appointments.html" style="color: #fff; text-decoration: none;">Appointments</a></li>
-            <li style="display: inline;"><a href="services.html" style="color: #fff; text-decoration: none;">Services</a></li>
+            <li style="display: inline; margin-right: 20px;"><a href="index.html" style="color: #fff; text-decoration: none;"><i class="fas fa-home"></i> Home</a></li>
+            <li style="display: inline; margin-right: 20px;"><a href="patients.html" style="color: #fff; text-decoration: none;"><i class="fas fa-user-injured"></i> Patients</a></li>
+            <li style="display: inline; margin-right: 20px;"><a href="doctors.html" style="color: #fff; text-decoration: none;"><i class="fas fa-user-md"></i> Doctors</a></li>
+            <li style="display: inline; margin-right: 20px;"><a href="appointments.html" style="color: #fff; text-decoration: none;"><i class="fas fa-calendar-alt"></i> Appointments</a></li>
+            <li style="display: inline;"><a href="services.html" style="color: #fff; text-decoration: none;"><i class="fas fa-concierge-bell"></i> Services</a></li>
         </ul>
     </nav>
 
-    <main style="padding: 20px;">
-        <section id="introduction" style="background-color: #fff; padding: 20px; margin-bottom: 20px; border-radius: 5px;">
-            <h2 style="color: #333;">Welcome to Our Hospital</h2>
-            <p>Our hospital is dedicated to providing the best medical care to our patients. We have a team of experienced doctors and staff who are committed to your health and well-being.</p>
+    <main>
+        <style>
+            .hero {
+                background-image: url('https://imgur.com/a/oF5bH6g');
+                background-size: cover;
+                background-position: center;
+                color: white;
+                text-align: center;
+                padding: 100px 20px;
+            }
+            .hero h2 {
+                font-size: 3rem;
+                margin-bottom: 20px;
+            }
+            .hero p {
+                font-size: 1.2rem;
+                margin-bottom: 30px;
+            }
+            .hero .btn {
+                background-color: #007bff;
+                color: white;
+                padding: 15px 30px;
+                text-decoration: none;
+                border-radius: 5px;
+                font-size: 1.2rem;
+            }
+            .services {
+                padding: 50px 20px;
+                text-align: center;
+            }
+            .services h2 {
+                font-size: 2.5rem;
+                margin-bottom: 40px;
+            }
+            .service-cards {
+                display: flex;
+                justify-content: center;
+                gap: 20px;
+                flex-wrap: wrap;
+            }
+            .card {
+                background-color: #fff;
+                border-radius: 10px;
+                box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+                padding: 20px;
+                width: 300px;
+                text-align: center;
+            }
+            .card i {
+                font-size: 3rem;
+                color: #007bff;
+                margin-bottom: 20px;
+            }
+            .card h3 {
+                font-size: 1.5rem;
+                margin-bottom: 10px;
+            }
+            @media (max-width: 768px) {
+                .service-cards {
+                    flex-direction: column;
+                    align-items: center;
+                }
+            }
+        </style>
+        <section class="hero">
+            <h2>Welcome to Your Health Guardian</h2>
+            <p>Providing compassionate care and medical excellence.</p>
+            <a href="appointments.html" class="btn">Book Appointment</a>
         </section>
-
-        <section id="services" style="background-color: #fff; padding: 20px; border-radius: 5px;">
-            <h2 style="color: #333;">Our Services</h2>
-            <ul style="list-style: none; padding: 0;">
-                <li style="margin-bottom: 10px; background-color: #f9f9f9; padding: 10px; border-radius: 3px;">Patient Registration</li>
-                <li style="margin-bottom: 10px; background-color: #f9f9f9; padding: 10px; border-radius: 3px;">Doctor Consultation</li>
-                <li style="margin-bottom: 10px; background-color: #f9f9f9; padding: 10px; border-radius: 3px;">Appointment Scheduling</li>
-                <li style="margin-bottom: 10px; background-color: #f9f9f9; padding: 10px; border-radius: 3px;">Billing and Invoicing</li>
-            </ul>
+        <section class="services">
+            <h2>Our Services</h2>
+            <div class="service-cards">
+                <div class="card">
+                    <i class="fas fa-user-md"></i>
+                    <h3>Expert Doctors</h3>
+                    <p>Board-certified specialists to cater to your needs.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-ambulance"></i>
+                    <h3>Emergency Care</h3>
+                    <p>24/7 emergency services for urgent situations.</p>
+                </div>
+                <div class="card">
+                    <i class="fas fa-pills"></i>
+                    <h3>Pharmacy</h3>
+                    <p>In-house pharmacy with a wide range of medicines.</p>
+                </div>
+            </div>
+        </section>
+        <section class="why-choose-us" style="padding: 50px 20px; text-align: center; background-color: #f9f9f9;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Why Choose Us?</h2>
+            <div class="features" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <div class="feature-card" style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 300px; text-align: center;">
+                    <i class="fas fa-clock" style="font-size: 3rem; color: #007bff; margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">24x7 Service</h3>
+                    <p>Our hospital is open 24/7 to provide you with the best medical care.</p>
+                </div>
+                <div class="feature-card" style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 300px; text-align: center;">
+                    <i class="fas fa-user-md" style="font-size: 3rem; color: #007bff; margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Expert Doctors</h3>
+                    <p>We have a team of experienced and board-certified doctors.</p>
+                </div>
+                <div class="feature-card" style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 300px; text-align: center;">
+                    <i class="fas fa-leaf" style="font-size: 3rem; color: #007bff; margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Clean Facility</h3>
+                    <p>We maintain a clean and hygienic environment for our patients.</p>
+                </div>
+            </div>
+        </section>
+        <section class="departments" style="padding: 50px 20px; text-align: center;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Our Departments</h2>
+            <div class="department-cards" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <div class="department-card" style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 300px; text-align: center;">
+                    <i class="fas fa-heartbeat" style="font-size: 3rem; color: #007bff; margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Cardiology</h3>
+                    <p>We provide the best care for your heart.</p>
+                </div>
+                <div class="department-card" style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 300px; text-align: center;">
+                    <i class="fas fa-bone" style="font-size: 3rem; color: #007bff; margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Orthopedics</h3>
+                    <p>We provide the best care for your bones.</p>
+                </div>
+                <div class="department-card" style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 300px; text-align: center;">
+                    <i class="fas fa-ear-deaf" style="font-size: 3rem; color: #007bff; margin-bottom: 20px;"></i>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">ENT</h3>
+                    <p>We provide the best care for your ear, nose, and throat.</p>
+                </div>
+            </div>
+        </section>
+        <section class="doctors" style="padding: 50px 20px; text-align: center; background-color: #f9f9f9;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Meet Our Doctors</h2>
+            <div class="doctor-cards" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <div class="doctor-card" style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 300px; text-align: center;">
+                    <img src="https://i.imgur.com/2Y2JQW1.png" alt="Doctor 1" style="width: 100%; border-radius: 10px; margin-bottom: 20px;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Dr. John Doe</h3>
+                    <p style="font-style: italic; margin-bottom: 10px;">Cardiologist</p>
+                    <p>10+ years of experience</p>
+                </div>
+                <div class="doctor-card" style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 300px; text-align: center;">
+                    <img src="https://i.imgur.com/cZ3YQ2r.png" alt="Doctor 2" style="width: 100%; border-radius: 10px; margin-bottom: 20px;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Dr. Jane Smith</h3>
+                    <p style="font-style: italic; margin-bottom: 10px;">Orthopedic Surgeon</p>
+                    <p>15+ years of experience</p>
+                </div>
+                <div class="doctor-card" style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 300px; text-align: center;">
+                    <img src="https://i.imgur.com/R2VfG2b.png" alt="Doctor 3" style="width: 100%; border-radius: 10px; margin-bottom: 20px;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">Dr. Richard Roe</h3>
+                    <p style="font-style: italic; margin-bottom: 10px;">ENT Specialist</p>
+                    <p>8+ years of experience</p>
+                </div>
+            </div>
+        </section>
+        <section class="appointment" style="padding: 50px 20px; text-align: center;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Book an Appointment</h2>
+            <form id="appointment-form" style="max-width: 600px; margin: 0 auto; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                <input type="text" id="name" name="name" placeholder="Your Name" required style="width: 100%; padding: 15px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ddd;">
+                <input type="email" id="email" name="email" placeholder="Your Email" required style="width: 100%; padding: 15px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ddd;">
+                <select id="department" name="department" required style="width: 100%; padding: 15px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ddd;">
+                    <option value="">Select Department</option>
+                    <option value="cardiology">Cardiology</option>
+                    <option value="orthopedics">Orthopedics</option>
+                    <option value="ent">ENT</option>
+                </select>
+                <input type="date" id="date" name="date" required style="width: 100%; padding: 15px; margin-bottom: 20px; border-radius: 5px; border: 1px solid #ddd;">
+                <button type="submit" style="background-color: #007bff; color: #fff; padding: 15px 30px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.2rem;">Book Now</button>
+            </form>
+        </section>
+        <section class="emergency-contact" style="background-color: #dc3545; color: #fff; padding: 20px; text-align: center;">
+            <h2 style="font-size: 2rem; margin: 0;">Emergency? Call Now: 102 / 108</h2>
+        </section>
+        <section class="testimonials" style="padding: 50px 20px; text-align: center; background-color: #f9f9f9;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px;">What Our Patients Say</h2>
+            <div class="testimonial-slider" style="max-width: 800px; margin: 0 auto; overflow: hidden; position: relative;">
+                <div class="slides" style="display: flex; transition: transform 0.5s ease-in-out;">
+                    <div class="slide" style="min-width: 100%; box-sizing: border-box; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="font-style: italic;">"The doctors and staff were amazing. I felt well-cared for throughout my stay."</p>
+                        <div class="rating" style="color: #ffc107; margin-top: 10px;">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                        </div>
+                        <p style="margin-top: 10px; font-weight: bold;">- John Doe</p>
+                    </div>
+                    <div class="slide" style="min-width: 100%; box-sizing: border-box; background-color: #fff; padding: 30px; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1);">
+                        <p style="font-style: italic;">"I am so grateful for the care I received. The facilities are top-notch."</p>
+                        <div class="rating" style="color: #ffc107; margin-top: 10px;">
+                            <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                        </div>
+                        <p style="margin-top: 10px; font-weight: bold;">- Jane Smith</p>
+                    </div>
+                </div>
+                <button class="prev" style="position: absolute; top: 50%; left: 10px; transform: translateY(-50%); background-color: #007bff; color: #fff; border: none; padding: 10px; border-radius: 50%; cursor: pointer;">&#10094;</button>
+                <button class="next" style="position: absolute; top: 50%; right: 10px; transform: translateY(-50%); background-color: #007bff; color: #fff; border: none; padding: 10px; border-radius: 50%; cursor: pointer;">&#10095;</button>
+            </div>
+        </section>
+        <section class="health-tips" style="padding: 50px 20px; text-align: center;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Health Tips & Blog</h2>
+            <div class="blog-posts" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <div class="blog-post" style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 300px; text-align: left;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">5 Foods for a Healthy Heart</h3>
+                    <p>Learn about the best foods to keep your heart in top shape.</p>
+                    <a href="#" style="color: #007bff; text-decoration: none; font-weight: bold;">Read More</a>
+                </div>
+                <div class="blog-post" style="background-color: #fff; border-radius: 10px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); padding: 20px; width: 300px; text-align: left;">
+                    <h3 style="font-size: 1.5rem; margin-bottom: 10px;">The Importance of Regular Check-ups</h3>
+                    <p>Find out why regular check-ups are crucial for your health.</p>
+                    <a href="#" style="color: #007bff; text-decoration: none; font-weight: bold;">Read More</a>
+                </div>
+            </div>
+        </section>
+        <section class="partners" style="padding: 50px 20px; text-align: center; background-color: #f9f9f9;">
+            <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Our Partners & Accreditations</h2>
+            <div class="logos" style="display: flex; justify-content: center; gap: 40px; flex-wrap: wrap; align-items: center;">
+                <img src="https://i.imgur.com/v2T51Vz.png" alt="ISO Logo" style="height: 60px;">
+                <img src="https://i.imgur.com/wY6p1hG.png" alt="NABH Logo" style="height: 60px;">
+                <img src="https://i.imgur.com/J3aYpE3.png" alt="Lab Partner Logo" style="height: 60px;">
+            </div>
+        </section>
+        <section class="bonus-cta" style="padding: 50px 20px; text-align: center;">
+            <div class="cta-buttons" style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap;">
+                <a href="#" class="btn" style="background-color: #007bff; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-size: 1.2rem;">💊 View Available Doctors</a>
+                <a href="#" class="btn" style="background-color: #28a745; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-size: 1.2rem;">📅 Schedule Your Health Checkup</a>
+                <a href="#" class="btn" style="background-color: #17a2b8; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-size: 1.2rem;">🏥 Take a Virtual Tour</a>
+                <a href="#" class="btn" style="background-color: #ffc107; color: white; padding: 15px 30px; text-decoration: none; border-radius: 5px; font-size: 1.2rem;">🔔 Get Health Alerts on WhatsApp</a>
+            </div>
         </section>
     </main>
 
-    <footer style="background-color: #333; color: #fff; text-align: center; padding: 1rem 0; position: fixed; bottom: 0; width: 100%;">
+    <footer style="background-color: #333; color: #fff; text-align: center; padding: 1rem 0; width: 100%;">
         <p>&copy; 2025 Hospital Management System. All rights reserved.</p>
     </footer>
 
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        document.getElementById('appointment-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            alert('Appointment booked successfully!');
+            this.reset();
+        });
+
+        const slides = document.querySelector('.slides');
+        const slideWidth = slides.clientWidth;
+        let slideIndex = 0;
+
+        document.querySelector('.next').addEventListener('click', () => {
+            slideIndex = (slideIndex + 1) % 2;
+            slides.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+        });
+
+        document.querySelector('.prev').addEventListener('click', () => {
+            slideIndex = (slideIndex - 1 + 2) % 2;
+            slides.style.transform = `translateX(-${slideIndex * slideWidth}px)`;
+        });
+    </script>
 </body>
 </html>
