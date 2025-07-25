@@ -59,8 +59,16 @@
                 <label for="avatar" style="display: block; margin-bottom: 5px;">Patient Photo:</label>
                 <input type="file" id="avatar" name="avatar" accept="image/*" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #ddd;">
 
+                <label for="consent" style="display: block; margin-bottom: 5px;">Consent Form:</label>
+                <input type="file" id="consent" name="consent" accept=".pdf,.jpg" style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #ddd;">
+
                 <button type="submit" tabindex="0" style="background-color: #007bff; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer;">Add Patient</button>
             </form>
+        </section>
+
+        <section id="patient-stats" style="background-color: #fff; padding: 20px; margin-bottom: 20px; border-radius: 5px;">
+            <h2 style="color: #333;">Patient Statistics</h2>
+            <canvas id="gender-chart" width="400" height="200"></canvas>
         </section>
 
         <section id="patient-list" style="background-color: #fff; padding: 20px; border-radius: 5px;">
@@ -77,6 +85,7 @@
                         <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Contact</th>
                         <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Problem</th>
                         <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Permanent Address</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Consent Form</th>
                         <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Actions</th>
                     </tr>
                 </thead>
@@ -125,6 +134,7 @@
     </footer>
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/dompurify/2.3.3/purify.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script>
         const api = {
             getPatients: async () => {
@@ -156,6 +166,41 @@
             patients = await api.getPatients();
             renderPatients();
             setupPagination();
+            renderGenderChart();
+        }
+
+        function renderGenderChart() {
+            const genderCounts = patients.reduce((acc, patient) => {
+                acc[patient.gender] = (acc[patient.gender] || 0) + 1;
+                return acc;
+            }, {});
+
+            const ctx = document.getElementById('gender-chart').getContext('2d');
+            new Chart(ctx, {
+                type: 'pie',
+                data: {
+                    labels: Object.keys(genderCounts),
+                    datasets: [{
+                        label: 'Gender Distribution',
+                        data: Object.values(genderCounts),
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false
+                }
+            });
         }
 
         function renderPatients() {
@@ -206,6 +251,11 @@
                 addressCell.style.border = '1px solid #ddd';
                 addressCell.style.padding = '10px';
 
+                const consentCell = newRow.insertCell();
+                consentCell.textContent = patient.consentForm || 'N/A';
+                consentCell.style.border = '1px solid #ddd';
+                consentCell.style.padding = '10px';
+
                 const actionsCell = newRow.insertCell();
                 actionsCell.style.border = '1px solid #ddd';
                 actionsCell.style.padding = '10px';
@@ -235,6 +285,27 @@
                     init();
                 };
                 actionsCell.appendChild(deleteButton);
+
+                const slipButton = document.createElement('button');
+                slipButton.textContent = 'Generate Slip';
+                slipButton.onclick = function() {
+                    const slipContent = `
+                        <h2>Hospital Management System</h2>
+                        <h3>OPD/IPD Slip</h3>
+                        <p><strong>Patient ID:</strong> ${patient.id}</p>
+                        <p><strong>Name:</strong> ${patient.name}</p>
+                        <p><strong>Age:</strong> ${patient.age}</p>
+                        <p><strong>Gender:</strong> ${patient.gender}</p>
+                        <p><strong>Contact:</strong> ${patient.contact}</p>
+                        <p><strong>Problem:</strong> ${patient.problem}</p>
+                        <p><strong>Address:</strong> ${patient.address}</p>
+                    `;
+                    const printWindow = window.open('', '', 'height=600,width=800');
+                    printWindow.document.write(slipContent);
+                    printWindow.document.close();
+                    printWindow.print();
+                };
+                actionsCell.appendChild(slipButton);
             });
         }
 
@@ -365,6 +436,11 @@
                 addressCell.style.border = '1px solid #ddd';
                 addressCell.style.padding = '10px';
 
+                const consentCell = newRow.insertCell();
+                consentCell.textContent = patient.consentForm || 'N/A';
+                consentCell.style.border = '1px solid #ddd';
+                consentCell.style.padding = '10px';
+
                 const actionsCell = newRow.insertCell();
                 actionsCell.style.border = '1px solid #ddd';
                 actionsCell.style.padding = '10px';
@@ -448,6 +524,12 @@
             };
 
             const avatarFile = document.getElementById('avatar').files[0];
+            const consentFile = document.getElementById('consent').files[0];
+
+            if (consentFile) {
+                newPatient.consentForm = consentFile.name;
+            }
+
             if (avatarFile) {
                 const reader = new FileReader();
                 reader.onload = async function(e) {
