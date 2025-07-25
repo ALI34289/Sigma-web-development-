@@ -48,6 +48,9 @@
                     <option value="other">Other</option>
                 </select>
 
+                <label for="contact" style="display: block; margin-bottom: 5px;">Contact:</label>
+                <input type="text" id="contact" name="contact" required style="width: 100%; padding: 8px; margin-bottom: 10px; border-radius: 3px; border: 1px solid #ddd;">
+
                 <button type="submit" style="background-color: #007bff; color: #fff; padding: 10px 15px; border: none; border-radius: 3px; cursor: pointer;">Add Patient</button>
             </form>
         </section>
@@ -57,9 +60,12 @@
             <table style="width: 100%; border-collapse: collapse;">
                 <thead>
                     <tr style="background-color: #f2f2f2;">
+                        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Patient ID</th>
                         <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Name</th>
                         <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Age</th>
                         <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Gender</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Contact</th>
+                        <th style="padding: 10px; border: 1px solid #ddd; text-align: left;">Actions</th>
                     </tr>
                 </thead>
                 <tbody id="patient-table-body">
@@ -69,6 +75,38 @@
         </section>
     </main>
 
+    <style>
+        @media (max-width: 768px) {
+            table, thead, tbody, th, td, tr {
+                display: block;
+            }
+            thead tr {
+                position: absolute;
+                top: -9999px;
+                left: -9999px;
+            }
+            tr {
+                margin-bottom: 1rem;
+            }
+            td {
+                border: none;
+                border-bottom: 1px solid #eee;
+                position: relative;
+                padding-left: 50%;
+            }
+            td:before {
+                position: absolute;
+                top: 6px;
+                left: 6px;
+                width: 45%;
+                padding-right: 10px;
+                white-space: nowrap;
+            }
+            td:nth-of-type(1):before { content: "Name"; }
+            td:nth-of-type(2):before { content: "Age"; }
+            td:nth-of-type(3):before { content: "Gender"; }
+        }
+    </style>
     <footer style="background-color: #333; color: #fff; text-align: center; padding: 1rem 0; width: 100%;">
         <p>&copy; 2025 Hospital Management System. All rights reserved.</p>
     </footer>
@@ -77,18 +115,57 @@
         document.getElementById('add-patient-form').addEventListener('submit', function(event) {
             event.preventDefault();
 
-            const name = document.getElementById('name').value;
-            const age = document.getElementById('age').value;
+            const nameInput = document.getElementById('name');
+            const ageInput = document.getElementById('age');
+            const contactInput = document.getElementById('contact');
+
+            let isValid = true;
+
+            if (nameInput.value.trim() === '') {
+                nameInput.style.borderColor = 'red';
+                isValid = false;
+            } else {
+                nameInput.style.borderColor = '#ddd';
+            }
+
+            if (ageInput.value.trim() === '') {
+                ageInput.style.borderColor = 'red';
+                isValid = false;
+            } else {
+                ageInput.style.borderColor = '#ddd';
+            }
+
+            if (contactInput.value.trim() === '') {
+                contactInput.style.borderColor = 'red';
+                isValid = false;
+            } else {
+                contactInput.style.borderColor = '#ddd';
+            }
+
+            if (!isValid) {
+                alert('Please fill in all required fields.');
+                return;
+            }
+
+            const name = nameInput.value;
+            const age = ageInput.value;
             const gender = document.getElementById('gender').value;
+            const contact = contactInput.value;
+            const patientId = 'P' + Math.floor(Math.random() * 1000);
 
             const tableBody = document.getElementById('patient-table-body');
             const newRow = tableBody.insertRow();
 
+            const patientIdCell = newRow.insertCell();
+            patientIdCell.textContent = patientId;
+            patientIdCell.style.border = '1px solid #ddd';
+            patientIdCell.style.padding = '10px';
+
             const nameCell = newRow.insertCell();
-            nameCell.textContent = name;
+            const genderIcon = gender === 'male' ? 'fas fa-male' : (gender === 'female' ? 'fas fa-female' : 'fas fa-user');
+            nameCell.innerHTML = `<i class="${genderIcon}" style="margin-right: 10px;"></i>${name}`;
             nameCell.style.border = '1px solid #ddd';
             nameCell.style.padding = '10px';
-
 
             const ageCell = newRow.insertCell();
             ageCell.textContent = age;
@@ -99,6 +176,30 @@
             genderCell.textContent = gender;
             genderCell.style.border = '1px solid #ddd';
             genderCell.style.padding = '10px';
+
+            const contactCell = newRow.insertCell();
+            contactCell.textContent = contact;
+            contactCell.style.border = '1px solid #ddd';
+            contactCell.style.padding = '10px';
+
+            const actionsCell = newRow.insertCell();
+            actionsCell.style.border = '1px solid #ddd';
+            actionsCell.style.padding = '10px';
+
+            const editButton = document.createElement('button');
+            editButton.innerHTML = '<i class="fas fa-edit"></i>';
+            editButton.style.marginRight = '5px';
+            editButton.onclick = function() {
+                // Add edit functionality here
+            };
+            actionsCell.appendChild(editButton);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.innerHTML = '<i class="fas fa-trash"></i>';
+            deleteButton.onclick = function() {
+                tableBody.removeChild(newRow);
+            };
+            actionsCell.appendChild(deleteB         utton);
 
             document.getElementById('add-patient-form').reset();
         });
